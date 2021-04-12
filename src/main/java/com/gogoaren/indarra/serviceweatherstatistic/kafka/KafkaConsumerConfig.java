@@ -20,13 +20,8 @@ import java.util.Map;
 @Slf4j
 public class KafkaConsumerConfig {
 
-//    @Value(value = "${kafka.bootstrapAddress}")
-//    private String bootstrapAddress;
-//    @Value(value = "${group.Id}")
-//    private String groupId;
-
     @Bean
-    public  ConsumerFactory<String, Weather> consumerFactory() {
+    public ConsumerFactory<String, Weather> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
         props.put(ConsumerConfig.GROUP_ID_CONFIG, "${group.Id}");
