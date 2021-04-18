@@ -41,7 +41,7 @@ public class StatisticControllerTest {
         String exceptedCity = "London";
         String expectedTemperature = "123";
         BigDecimal exceptedTemp = new BigDecimal(expectedTemperature);
-        var listWeather = List.of(TestUtils.createWeather(exceptedCity, exceptedTemp));
+        var listWeather = List.of(TestUtils.createWeather(exceptedCity, exceptedTemp,0.0));
         when(statisticService.getStatistic(StatisticType.WARMEST_CITIES))
                 .thenReturn(listWeather);
         //when

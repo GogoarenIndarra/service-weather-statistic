@@ -27,7 +27,7 @@ public class Statistic {
             weatherStatisticQueue.add(weather);
             return;
         }
-        if (weatherComparator.compare(weather, weatherStatisticQueue.peek()) == -1) {
+        if (weatherComparator.compare(weather, weatherStatisticQueue.peek()) == 1) {
             weatherStatisticQueue.add(weather);
             weatherStatisticQueue.poll();
         }

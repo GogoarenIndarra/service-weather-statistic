@@ -48,7 +48,7 @@ public class StatisticServiceTest {
         String exceptedString = "London";
         BigDecimal exceptedTemp = new BigDecimal(123);
         when(warmestCityStatisticMock.getSortedStatisticData())
-                .thenReturn(List.of(TestUtils.createWeather(exceptedString, exceptedTemp)));
+                .thenReturn(List.of(TestUtils.createWeather(exceptedString, exceptedTemp, 0.0)));
         //when
         var result = statisticService.getStatistic(StatisticType.WARMEST_CITIES);
         //then
