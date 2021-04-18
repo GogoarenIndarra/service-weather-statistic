@@ -41,7 +41,7 @@ public class StatisticControllerTest {
         String exceptedCity = "London";
         String expectedTemperature = "123";
         BigDecimal exceptedTemp = new BigDecimal(expectedTemperature);
-        var listWeather = List.of(TestUtils.createWeather(exceptedCity, exceptedTemp,0.0));
+        var listWeather = List.of(TestUtils.createWeather(exceptedCity, exceptedTemp, 0.0));
         when(statisticService.getStatistic(StatisticType.WARMEST_CITIES))
                 .thenReturn(listWeather);
         //when
@@ -69,4 +69,15 @@ public class StatisticControllerTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }
+
+
+    @Test
+    void shouldReturnBadRequestWhenTypeDontBelongToEnumType() throws Exception {
+        mockMvc.perform((MockMvcRequestBuilders
+                .get("/api/statistic/{type}", "dummyString")
+                .accept(MediaType.APPLICATION_JSON)))
+                .andDo(print())
+                .andExpect(status().isBadRequest());
+    }
+
 }

@@ -5,6 +5,7 @@ import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticService;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.EnumUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,8 +26,8 @@ public class StatisticController {
 
     @GetMapping(value = "/{type}")
     public ResponseEntity<List<Weather>> getStatisticByType(@PathVariable String type) {
-//        if (!Arrays.asList(StatisticType.values()).contains(type))
-//            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
+        if (!EnumUtils.isValidEnum(StatisticType.class, type))
+            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
         try {
             return new ResponseEntity<>(statisticService.getStatistic(StatisticType.valueOf(type)), HttpStatus.OK);
         } catch (IllegalArgumentException exception) {
