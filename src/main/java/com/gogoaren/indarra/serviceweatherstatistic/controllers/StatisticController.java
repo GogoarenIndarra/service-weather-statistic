@@ -5,12 +5,13 @@ import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticService;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticType;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -19,12 +20,17 @@ import java.util.List;
 @AllArgsConstructor
 @Slf4j
 public class StatisticController {
+
     StatisticService statisticService;
 
-
     @GetMapping(value = "/{type}")
-    public List<Weather> getStatisticByType(@RequestBody String type) {
-
-        return statisticService.getStatistic(StatisticType.valueOf(type));
+    public ResponseEntity<List<Weather>> getStatisticByType(@PathVariable String type) {
+//        if (!Arrays.asList(StatisticType.values()).contains(type))
+//            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
+        try {
+            return new ResponseEntity<>(statisticService.getStatistic(StatisticType.valueOf(type)), HttpStatus.OK);
+        } catch (IllegalArgumentException exception) {
+            return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
+        }
     }
 }

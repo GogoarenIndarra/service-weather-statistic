@@ -15,7 +15,6 @@ import java.util.Map;
 @AllArgsConstructor
 public class StatisticService {
 
-
     Map<StatisticType, Statistic> weatherStatisticsMap;
 
     public void supplyWeather(Weather weather) {
@@ -23,9 +22,9 @@ public class StatisticService {
     }
 
     public List<Weather> getStatistic(StatisticType type) {
-        var statistic =  weatherStatisticsMap.get(type);
+        var statistic = weatherStatisticsMap.get(type);
         Assert.notNull(statistic, "Statistic not implement for this type: " + type);
-        return    statistic.getSortedStatisticData();
+        return statistic.getSortedStatisticData();
 
     }
 }

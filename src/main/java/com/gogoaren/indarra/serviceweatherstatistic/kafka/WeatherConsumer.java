@@ -15,12 +15,10 @@ public class WeatherConsumer {
 
     StatisticService statisticService;
 
-
     @KafkaListener(topics = "${weather.topic.name}", containerFactory = "kafkaListenerContainerFactory")
     public void listenWeather(Weather message) {
         log.info("Received Message from WeatherService: " + message);
         statisticService.supplyWeather(message);
-
 
     }
 }
