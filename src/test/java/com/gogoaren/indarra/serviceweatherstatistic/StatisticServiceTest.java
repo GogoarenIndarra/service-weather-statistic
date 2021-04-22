@@ -1,12 +1,10 @@
 package com.gogoaren.indarra.serviceweatherstatistic;
 
-import com.gogoaren.indarra.serviceweatherstatistic.model.Weather;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.Statistic;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticService;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 
 import java.math.BigDecimal;
 import java.util.HashMap;
