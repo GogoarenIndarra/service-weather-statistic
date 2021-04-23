@@ -4,6 +4,7 @@ import com.gogoaren.indarra.serviceweatherstatistic.model.Weather;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.annotation.EnableKafka;
@@ -20,11 +21,16 @@ import java.util.Map;
 @Slf4j
 public class KafkaConsumerConfig {
 
+    @Value(value = "${kafka.bootstrap.Address}")
+    private String bootstrapAddress;
+    @Value(value = "${group.Id}")
+    private String groupId;
+
     @Bean
     public ConsumerFactory<String, Weather> consumerFactory() {
         Map<String, Object> props = new HashMap<>();
-        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "${kafka.bootstrap.Address}");
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, "${group.Id}");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapAddress);
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         return new DefaultKafkaConsumerFactory<>(props, new StringDeserializer(), new JsonDeserializer<>(Weather.class));
     }
 
