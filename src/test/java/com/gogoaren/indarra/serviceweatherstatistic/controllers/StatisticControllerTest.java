@@ -20,13 +20,10 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-
 public class StatisticControllerTest {
 
     private StatisticService statisticService;
-
     private MockMvc mockMvc;
-    private static final String CONTENT_TYPE = "application/json";
 
     @BeforeEach
     void setUp() {
@@ -34,9 +31,8 @@ public class StatisticControllerTest {
         this.mockMvc = MockMvcBuilders.standaloneSetup(new StatisticController(statisticService)).build();
     }
 
-
     @Test
-    void shouldReturnListWhenStatisticServiceReturnValidResuult() throws Exception {
+    void shouldReturnListWhenStatisticServiceReturnValidResult() throws Exception {
         //given
         String exceptedCity = "London";
         String expectedTemperature = "123";
@@ -53,9 +49,7 @@ public class StatisticControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].city").value(exceptedCity))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.[0].temperature").value(expectedTemperature));
-
     }
-
 
     @Test
     void shouldReturnBadRequestWhenServiceThrowException() throws Exception {
@@ -70,7 +64,6 @@ public class StatisticControllerTest {
                 .andExpect(status().isBadRequest());
     }
 
-
     @Test
     void shouldReturnBadRequestWhenTypeDontBelongToEnumType() throws Exception {
         mockMvc.perform((MockMvcRequestBuilders
@@ -79,5 +72,4 @@ public class StatisticControllerTest {
                 .andDo(print())
                 .andExpect(status().isBadRequest());
     }
-
 }
