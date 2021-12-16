@@ -3,7 +3,7 @@ package com.gogoaren.indarra.serviceweatherstatistic;
 import com.gogoaren.indarra.serviceweatherstatistic.model.Weather;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticService;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticType;
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,16 +19,13 @@ public class WeatherStatisticIntegrationTest {
     @Autowired
     StatisticService statisticService;
 
-    private String cityName = "Madrid";
+    private final String cityName = "Madrid";
 
     @BeforeEach
     public void setUp() {
-        IntStream.range(0, 40).forEach(i -> statisticService.supplyWeather(TestUtils.
-                createWeather(cityName + Integer.toString(i), BigDecimal.valueOf(i), i)));
-//        for (int i = 0; i < 40; i++) {
-//            statisticService.supplyWeather(TestUtils.
-//                    createWeather(cityName + Integer.toString(i), BigDecimal.valueOf(i), i));
-//        }
+        IntStream.range(0, 40).forEach(i -> statisticService
+                .supplyWeather(TestUtils
+                        .createWeather(cityName + i, BigDecimal.valueOf(i), i)));
     }
 
     @Test
@@ -46,12 +43,12 @@ public class WeatherStatisticIntegrationTest {
         List<Weather> topWindiestCities = statisticService.getStatistic(StatisticType.WINDIEST_CITIES);
 
         //then
-        Assert.assertEquals(topWarmestCity, topWarmestCities.get(9).getCity());
-        Assert.assertEquals(lowWarmestCity, topWarmestCities.get(0).getCity());
-        Assert.assertEquals(topColdestCity, topColdestCities.get(9).getCity());
-        Assert.assertEquals(lowColdestCity, topColdestCities.get(0).getCity());
-        Assert.assertEquals(topWindiestCity, topWindiestCities.get(9).getCity());
-        Assert.assertEquals(lowWindiestCity, topWindiestCities.get(0).getCity());
+        Assertions.assertEquals(topWarmestCity, topWarmestCities.get(9).getCity());
+        Assertions.assertEquals(lowWarmestCity, topWarmestCities.get(0).getCity());
+        Assertions.assertEquals(topColdestCity, topColdestCities.get(9).getCity());
+        Assertions.assertEquals(lowColdestCity, topColdestCities.get(0).getCity());
+        Assertions.assertEquals(topWindiestCity, topWindiestCities.get(9).getCity());
+        Assertions.assertEquals(lowWindiestCity, topWindiestCities.get(0).getCity());
     }
 
 }
