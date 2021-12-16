@@ -1,15 +1,12 @@
 package com.gogoaren.indarra.serviceweatherstatistic.statistic;
 
 import com.gogoaren.indarra.serviceweatherstatistic.model.Weather;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.stream.Collectors;
-
 
 public class Statistic {
 

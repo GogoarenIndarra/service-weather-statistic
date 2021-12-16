@@ -19,7 +19,5 @@ public class WeatherComparators {
     Comparator<Weather> getWind() {
         return Comparator.comparing(Weather::getWind);
     }
-
-
 }
 
