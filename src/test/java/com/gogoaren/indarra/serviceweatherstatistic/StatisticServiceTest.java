@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class StatisticServiceTest {
+class StatisticServiceTest {
 
     private StatisticService statisticService;
     private Statistic warmestCityStatisticMock;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         warmestCityStatisticMock = mock(Statistic.class);
         Map<StatisticType, Statistic> statistics = new HashMap<>();
         statistics.put(StatisticType.WARMEST_CITIES, warmestCityStatisticMock);
@@ -29,32 +29,31 @@ public class StatisticServiceTest {
     }
 
     @Test
-    public void shouldThrowExceptionWhenNotSupportedEnumStatisticUsed() {
-        StatisticType notImplementedStatistic = StatisticType.WINDIEST_CITIES;
-        Exception exception = assertThrows(IllegalArgumentException.class, () ->
+    void shouldThrowException_WhenNotSupportedEnumStatisticUsed() {
+        final StatisticType notImplementedStatistic = StatisticType.WINDIEST_CITIES;
+        final Exception exception = assertThrows(IllegalArgumentException.class, () ->
                 statisticService.getStatistic(notImplementedStatistic));
 
-        String expectedMessage = "Statistic not implement for this type: " + notImplementedStatistic;
-        String actualMessage = exception.getMessage();
+        final String expectedMessage = "Statistic not implement for this type: " + notImplementedStatistic;
+        final String actualMessage = exception.getMessage();
 
         assertTrue(actualMessage.contains(expectedMessage));
     }
 
     @Test
-    public void shouldReturnListOfWeatherWhenStatisticExists() {
+    void shouldReturnListOfWeather_WhenStatisticExists() {
         //given
-        String exceptedString = "London";
-        BigDecimal exceptedTemp = new BigDecimal(123);
+        final String exceptedString = "London";
+        final BigDecimal exceptedTemp = new BigDecimal(123);
         when(warmestCityStatisticMock.getSortedStatisticData())
                 .thenReturn(List.of(TestUtils.createWeather(exceptedString, exceptedTemp, 0.0)));
         //when
-        var result = statisticService.getStatistic(StatisticType.WARMEST_CITIES);
+        final var result = statisticService.getStatistic(StatisticType.WARMEST_CITIES);
         //then
-        assertEquals(result.size(), 1);
+        assertEquals(1, result.size());
         assertEquals(result.get(0).getCity(), exceptedString);
         assertEquals(result.get(0).getTemperature(), exceptedTemp);
     }
-
 
 
 }

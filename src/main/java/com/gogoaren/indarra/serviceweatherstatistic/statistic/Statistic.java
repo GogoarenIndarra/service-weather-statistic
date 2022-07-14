@@ -19,7 +19,7 @@ public class Statistic {
         weatherStatisticQueue = new PriorityQueue<>(recordsNumber, weatherComparator);
     }
 
-    public void supplyWeather(Weather weather) {
+    public void supplyWeather(final Weather weather) {
         if (weatherStatisticQueue.size() < 10) {
             weatherStatisticQueue.add(weather);
             return;

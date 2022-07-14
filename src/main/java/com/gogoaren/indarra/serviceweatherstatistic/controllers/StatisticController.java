@@ -3,7 +3,7 @@ package com.gogoaren.indarra.serviceweatherstatistic.controllers;
 import com.gogoaren.indarra.serviceweatherstatistic.model.Weather;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticService;
 import com.gogoaren.indarra.serviceweatherstatistic.statistic.StatisticType;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.EnumUtils;
 import org.springframework.http.HttpStatus;
@@ -19,14 +19,14 @@ import java.util.List;
 
 @RequestMapping(produces = {MediaType.APPLICATION_JSON_VALUE}, path = "/api/statistic")
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Slf4j
 public class StatisticController {
 
-    StatisticService statisticService;
+    private final StatisticService statisticService;
 
     @GetMapping(value = "/{type}")
-    public ResponseEntity<List<Weather>> getStatisticByType(@PathVariable String type) {
+    public ResponseEntity<List<Weather>> getStatisticByType(@PathVariable final String type) {
         if (!EnumUtils.isValidEnum(StatisticType.class, type))
             return new ResponseEntity<>(Collections.emptyList(), HttpStatus.BAD_REQUEST);
         try {
