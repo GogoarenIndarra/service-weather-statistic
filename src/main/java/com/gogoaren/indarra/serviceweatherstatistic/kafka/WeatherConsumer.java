@@ -13,12 +13,11 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class WeatherConsumer {
 
-    StatisticService statisticService;
+    private final StatisticService statisticService;
 
     @KafkaListener(topics = "${weather.topic.name}", containerFactory = "kafkaListenerContainerFactory")
-    public void listenWeather(Weather message) {
+    public void listenWeather(final Weather message) {
         log.info("Received Message from WeatherService: " + message);
         statisticService.supplyWeather(message);
-
     }
 }

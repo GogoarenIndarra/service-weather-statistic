@@ -14,33 +14,34 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 @SpringBootTest
-public class WeatherStatisticIntegrationTest {
+class WeatherStatisticIntegrationTest {
 
     @Autowired
-    StatisticService statisticService;
+    private StatisticService statisticService;
 
     private final String cityName = "Madrid";
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         IntStream.range(0, 40).forEach(i -> statisticService
                 .supplyWeather(TestUtils
                         .createWeather(cityName + i, BigDecimal.valueOf(i), i)));
     }
 
     @Test
-    public void weatherStatisticShouldReturnCorrectValue() {
+    void weatherStatisticShouldReturnCorrectValue() {
         //given
-        String topWarmestCity = cityName + "39";
-        String lowWarmestCity = cityName + "30";
-        String topColdestCity = cityName + "0";
-        String lowColdestCity = cityName + "9";
-        String topWindiestCity = cityName + "39";
-        String lowWindiestCity = cityName + "30";
+        final String topWarmestCity = cityName + "39";
+        final String lowWarmestCity = cityName + "30";
+        final String topColdestCity = cityName + "0";
+        final String lowColdestCity = cityName + "9";
+        final String topWindiestCity = cityName + "39";
+        final String lowWindiestCity = cityName + "30";
+
         //when
-        List<Weather> topWarmestCities = statisticService.getStatistic(StatisticType.WARMEST_CITIES);
-        List<Weather> topColdestCities = statisticService.getStatistic(StatisticType.COLDEST_CITIES);
-        List<Weather> topWindiestCities = statisticService.getStatistic(StatisticType.WINDIEST_CITIES);
+        final List<Weather> topWarmestCities = statisticService.getStatistic(StatisticType.WARMEST_CITIES);
+        final List<Weather> topColdestCities = statisticService.getStatistic(StatisticType.COLDEST_CITIES);
+        final List<Weather> topWindiestCities = statisticService.getStatistic(StatisticType.WINDIEST_CITIES);
 
         //then
         Assertions.assertEquals(topWarmestCity, topWarmestCities.get(9).getCity());
