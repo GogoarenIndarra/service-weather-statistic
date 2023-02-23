@@ -13,8 +13,7 @@ public class Statistic {
     Comparator<Weather> weatherComparator;
     Queue<Weather> weatherStatisticQueue;
 
-
-    public Statistic(Comparator<Weather> weatherComparator, int recordsNumber) {
+    public Statistic(final Comparator<Weather> weatherComparator, final int recordsNumber) {
         this.weatherComparator = weatherComparator;
         weatherStatisticQueue = new PriorityQueue<>(recordsNumber, weatherComparator);
     }

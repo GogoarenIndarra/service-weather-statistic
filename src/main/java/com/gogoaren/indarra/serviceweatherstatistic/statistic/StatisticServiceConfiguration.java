@@ -15,8 +15,7 @@ public class StatisticServiceConfiguration {
     private final WeatherComparators weatherComparators;
 
     @Bean
-    Map<StatisticType, Statistic> weatherStatisticsMap(final @Value("${statistic.record.size}") int size) {
-
+    Map<StatisticType, Statistic> weatherStatisticsMap(@Value("${statistic.record.size}") final int size) {
         final Map<StatisticType, Statistic> statisticMap = new HashMap<>();
         statisticMap.put(StatisticType.WARMEST_CITIES, new Statistic(weatherComparators.getTemperatureDescending(), size));
         statisticMap.put(StatisticType.COLDEST_CITIES, new Statistic(weatherComparators.getTemperatureAscending(), size));
