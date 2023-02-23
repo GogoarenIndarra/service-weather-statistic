@@ -5,9 +5,10 @@ import lombok.*;
 
 import java.math.BigDecimal;
 
+@Data
 @Builder
 @AllArgsConstructor
-@Getter
+@NoArgsConstructor
 public class Weather {
 
     @JsonProperty("city")
