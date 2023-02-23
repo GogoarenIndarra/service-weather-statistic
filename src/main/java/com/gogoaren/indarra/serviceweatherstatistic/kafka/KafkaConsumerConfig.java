@@ -21,9 +21,9 @@ import java.util.Map;
 @Slf4j
 public class KafkaConsumerConfig {
 
-    @Value(value = "${kafka.bootstrap.Address}")
+    @Value(value = "${kafka.bootstrap.address}")
     private String bootstrapAddress;
-    @Value(value = "${group.Id}")
+    @Value(value = "${group.id}")
     private String groupId;
 
     @Bean
@@ -36,11 +36,8 @@ public class KafkaConsumerConfig {
 
 
     @Bean
-    public ConcurrentKafkaListenerContainerFactory<String, Weather>
-    kafkaListenerContainerFactory() {
-
-        final ConcurrentKafkaListenerContainerFactory<String, Weather> factory =
-                new ConcurrentKafkaListenerContainerFactory<>();
+    public ConcurrentKafkaListenerContainerFactory<String, Weather> kafkaListenerContainerFactory() {
+        final ConcurrentKafkaListenerContainerFactory<String, Weather> factory = new ConcurrentKafkaListenerContainerFactory<>();
         factory.setConsumerFactory(consumerFactory());
         return factory;
     }

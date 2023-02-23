@@ -21,7 +21,7 @@ public class StatisticService {
     }
 
     public List<Weather> getStatistic(final StatisticType type) {
-        var statistic = weatherStatisticsMap.get(type);
+        final var statistic = weatherStatisticsMap.get(type);
         Assert.notNull(statistic, "Statistic not implement for this type: " + type);
         return statistic.getSortedStatisticData();
 

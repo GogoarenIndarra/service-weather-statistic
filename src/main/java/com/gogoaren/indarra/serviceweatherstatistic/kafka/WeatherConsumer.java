@@ -17,7 +17,7 @@ public class WeatherConsumer {
 
     @KafkaListener(topics = "${weather.topic.name}", containerFactory = "kafkaListenerContainerFactory")
     public void listenWeather(final Weather message) {
-        log.info("Received Message from WeatherService: " + message);
+        log.info("Received Message from WeatherService: {}", message);
         statisticService.supplyWeather(message);
     }
 }
